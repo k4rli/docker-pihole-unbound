@@ -11,11 +11,11 @@ services:
     hostname: ${HOSTNAME}
     domainname: ${DOMAIN_NAME}
     ports:
-      - 443:443/tcp
+      #- 443:443/tcp
       - 53:53/tcp
       - 53:53/udp
       - 80:80/tcp
-      # - 5335:5335/tcp # Uncomment to enable unbound access on local server
+      - 5335:5335/tcp # Uncomment to enable unbound access on local server
       # - 22/tcp # Uncomment to enable SSH
     environment:
       ServerIP: ${ServerIP}
@@ -30,6 +30,6 @@ services:
       DNSSEC: "true" # Enable DNSSEC
     volumes:
       - etc_pihole-unbound:/etc/pihole:rw
+      - ./volume/adlists.list:/etc/pihole/adlists.list:rw
       - etc_pihole_dnsmasq-unbound:/etc/dnsmasq.d:rw
     restart: unless-stopped
-
